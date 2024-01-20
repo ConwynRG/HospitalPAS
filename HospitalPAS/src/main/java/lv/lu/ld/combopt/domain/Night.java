@@ -11,6 +11,6 @@ public class Night {
 
     @Override
     public String toString() {
-        return String.format("Night Nr. %d", getNumber());
+        return Integer.toString(getNumber());
     }
 }

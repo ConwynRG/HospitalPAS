@@ -7,8 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @PlanningEntity
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class BedDesignation {
     private PatientAdmission patientAdmission;
     @PlanningVariable
@@ -16,6 +16,6 @@ public class BedDesignation {
 
     @Override
     public String toString() {
-        return String.format("%s assigned %s", patientAdmission.toString(), bed.toString());
+        return String.format("%s assigned %s", patientAdmission, bed);
     }
 }

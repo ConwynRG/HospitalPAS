@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static lv.lu.ld.combopt.Main.LOGGER;
@@ -61,15 +62,21 @@ public class PatientAdmissionSchedule {
     private List<Specialization> specializations = new ArrayList<>();
 
     public void print() {
-      //  List<BedDesignation> designations = this.getBedDesignations().stream().sorted(Comparator.comparingInt(dest -> dest.getPatientAdmission().getArrivalNight().getNumber())).toList();
+        List<BedDesignation> designations = this.getBedDesignations().stream().sorted(Comparator.comparingInt(dest -> dest.getPatientAdmission().getArrivalNight().getNumber())).toList();
 
-        this.getBedDesignations().forEach(designation -> {
+        designations.forEach(designation -> {
             LOGGER.info(designation.getPatientAdmission().getPatient().getName()
                     + ", arrival: " + designation.getPatientAdmission().getArrivalNight()
-                    + ", departure: " + designation.getPatientAdmission().getDepartureNight());
+                    + ", departure: " + designation.getPatientAdmission().getDepartureNight()
+                    + ", specialization: " + designation.getPatientAdmission().getSpecialization()
+                    + (designation.getPatientAdmission().getIsSpecializationRequired() ? "(required)" : ""));
 
 
-            LOGGER.info("    " + (designation.getBed() != null ? designation.getBed().getRoom().getDepartment() : "") + " - " + designation.getBed());
+            LOGGER.info("    " + (designation.getBed() != null
+                        ? designation.getBed().getRoom().getDepartment()
+                            + " (" +  designation.getBed().getRoom().getDepartment().getSpecialization() + ")"
+                        : "")
+                    + " - " + designation.getBed());
         });
     }
 
@@ -94,7 +101,7 @@ public class PatientAdmissionSchedule {
         Department department2 = new Department("Intense Care Dep.", specialization2, new ArrayList<>());
 
         Room room1 = new Room("Room 1", department1, 2, Room.RoomGender.NONE, new ArrayList<>(), new ArrayList<>());
-        Room room2 = new Room("Room 2", department1, 2, Room.RoomGender.NONE, new ArrayList<>(), new ArrayList<>());
+        Room room2 = new Room("Room 2", department2, 2, Room.RoomGender.NONE, new ArrayList<>(), new ArrayList<>());
 
         department1.getRooms().addAll(List.of(room1));
         department2.getRooms().addAll(List.of(room2));
@@ -119,23 +126,23 @@ public class PatientAdmissionSchedule {
 
         PatientAdmission patientAdmissionA = new PatientAdmission(patientA, night1, night6, specialization2, true);
         PatientAdmission patientAdmissionB = new PatientAdmission(patientB, night1, night5, specialization2, false);
-        PatientAdmission patientAdmissionC = new PatientAdmission(patientC, night4, night7, specialization1, false);
+        PatientAdmission patientAdmissionC = new PatientAdmission(patientC, night5, night7, specialization1, false);
         PatientAdmission patientAdmissionD = new PatientAdmission(patientD, night1, night3, specialization1, false);
-        PatientAdmission patientAdmissionE = new PatientAdmission(patientE, night2, night4, specialization1, true);
-        PatientAdmission patientAdmissionF = new PatientAdmission(patientF, night3, night5, specialization1, false);
-        PatientAdmission patientAdmissionG = new PatientAdmission(patientG, night5, night7, specialization1, false);
+        PatientAdmission patientAdmissionE = new PatientAdmission(patientE, night3, night4, specialization1, true);
+        PatientAdmission patientAdmissionF = new PatientAdmission(patientF, night4, night5, specialization1, true);
+        PatientAdmission patientAdmissionG = new PatientAdmission(patientG, night6, night7, specialization1, false);
         PatientAdmission patientAdmissionH = new PatientAdmission(patientH, night1, night2, specialization1, false);
-        PatientAdmission patientAdmissionI = new PatientAdmission(patientI, night6, night7, specialization1, true);
+        PatientAdmission patientAdmissionI = new PatientAdmission(patientI, night7, night7, specialization2, true);
 
-        BedDesignation bedDesignationA = new BedDesignation(patientAdmissionA, null);
-        BedDesignation bedDesignationB = new BedDesignation(patientAdmissionB, null);
-        BedDesignation bedDesignationC = new BedDesignation(patientAdmissionC, null);
-        BedDesignation bedDesignationD = new BedDesignation(patientAdmissionD, null);
-        BedDesignation bedDesignationE = new BedDesignation(patientAdmissionE, null);
-        BedDesignation bedDesignationF = new BedDesignation(patientAdmissionF, null);
-        BedDesignation bedDesignationG = new BedDesignation(patientAdmissionG, null);
-        BedDesignation bedDesignationH = new BedDesignation(patientAdmissionH, null);
-        BedDesignation bedDesignationI = new BedDesignation(patientAdmissionI, null);
+        BedDesignation bedDesignationA = new BedDesignation(1, patientAdmissionA, null);
+        BedDesignation bedDesignationB = new BedDesignation(2, patientAdmissionB, null);
+        BedDesignation bedDesignationC = new BedDesignation(3, patientAdmissionC, null);
+        BedDesignation bedDesignationD = new BedDesignation(4, patientAdmissionD, null);
+        BedDesignation bedDesignationE = new BedDesignation(5, patientAdmissionE, null);
+        BedDesignation bedDesignationF = new BedDesignation(6, patientAdmissionF, null);
+        BedDesignation bedDesignationG = new BedDesignation(7, patientAdmissionG, null);
+        BedDesignation bedDesignationH = new BedDesignation(8, patientAdmissionH, null);
+        BedDesignation bedDesignationI = new BedDesignation(9,patientAdmissionI, null);
 
         problem.getNights().addAll(List.of(night1, night2, night3, night4, night5, night6, night7));
         problem.getSpecializations().addAll(List.of(specialization1, specialization2));

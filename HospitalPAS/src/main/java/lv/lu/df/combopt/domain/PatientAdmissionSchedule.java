@@ -68,14 +68,15 @@ public class PatientAdmissionSchedule {
                     + ", arrival: " + designation.getPatientAdmission().getArrivalNight()
                     + ", departure: " + designation.getPatientAdmission().getDepartureNight()
                     + ", specialization: " + designation.getPatientAdmission().getSpecialization()
-                    + (designation.getPatientAdmission().getIsSpecializationRequired() ? "(required)" : ""));
+                    + (designation.getPatientAdmission().getIsSpecializationRequired() ? "(required)" : "")
+                    + ", gender: " + designation.getPatientAdmission().getPatient().getGender().name());
 
 
             Main.LOGGER.info("    " + (designation.getBed() != null
                         ? designation.getBed().getRoom().getDepartment()
                             + " (" +  designation.getBed().getRoom().getDepartment().getSpecialization() + ")"
-                        : "")
-                    + " - " + designation.getBed());
+                            + " - " + designation.getBed() + " (" + designation.getBed().getRoom().getRoomGender().name() + ")"
+                        : "The bed isn't assigned"));
         });
     }
 
@@ -99,19 +100,25 @@ public class PatientAdmissionSchedule {
         Department department1 = new Department("General Ward Dep.", specialization1, new ArrayList<>());
         Department department2 = new Department("Intense Care Dep.", specialization2, new ArrayList<>());
 
-        Room room1 = new Room("Room 1", department1, 2, Room.RoomGender.NONE, new ArrayList<>(), new ArrayList<>());
-        Room room2 = new Room("Room 2", department2, 2, Room.RoomGender.NONE, new ArrayList<>(), new ArrayList<>());
+        Room room1 = new Room("Room 11", department1, 2, Room.RoomGender.FEMALE, new ArrayList<>(), new ArrayList<>());
+        Room room2 = new Room("Room 21", department2, 2, Room.RoomGender.MALE, new ArrayList<>(), new ArrayList<>());
+        Room room3 = new Room("Room 12", department1, 1, Room.RoomGender.MALE, new ArrayList<>(), new ArrayList<>());
+        Room room4 = new Room("Room 22", department2, 1, Room.RoomGender.FEMALE, new ArrayList<>(), new ArrayList<>());
 
-        department1.getRooms().addAll(List.of(room1));
-        department2.getRooms().addAll(List.of(room2));
+        department1.getRooms().addAll(List.of(room1, room3));
+        department2.getRooms().addAll(List.of(room2, room4));
 
         Bed bed1 = new Bed(room1, 1);
         Bed bed2 = new Bed(room1, 2);
         Bed bed3 = new Bed(room2, 1);
         Bed bed4 = new Bed(room2, 2);
+        Bed bed5 = new Bed(room3, 1);
+        Bed bed6 = new Bed(room4, 1);
 
         room1.getBeds().addAll(List.of(bed1, bed2));
         room2.getBeds().addAll(List.of(bed3, bed4));
+        room3.getBeds().add(bed5);
+        room4.getBeds().add(bed6);
 
         Patient patientA = new Patient("A", Patient.PatientGender.FEMALE, 1, new ArrayList<>(), new ArrayList<>());
         Patient patientB = new Patient("B", Patient.PatientGender.MALE, 1, new ArrayList<>(), new ArrayList<>());
@@ -146,8 +153,8 @@ public class PatientAdmissionSchedule {
         problem.getNights().addAll(List.of(night1, night2, night3, night4, night5, night6, night7));
         problem.getSpecializations().addAll(List.of(specialization1, specialization2));
         problem.getDepartments().addAll(List.of(department1, department2));
-        problem.getRooms().addAll(List.of(room1, room2));
-        problem.getBeds().addAll(List.of(bed1, bed2, bed3, bed4));
+        problem.getRooms().addAll(List.of(room1, room2, room3, room4));
+        problem.getBeds().addAll(List.of(bed1, bed2, bed3, bed4, bed5, bed6));
         problem.getPatients().addAll(List.of(patientA, patientB, patientC, patientD, patientE, patientF, patientG, patientH, patientI));
         problem.getPatientAdmissions().addAll(List.of(patientAdmissionA, patientAdmissionB, patientAdmissionC, patientAdmissionD, patientAdmissionE,
                 patientAdmissionF, patientAdmissionG, patientAdmissionH, patientAdmissionI));

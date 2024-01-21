@@ -26,6 +26,13 @@ public class BedDesignation {
         return bed.getRoom().getDepartment().getSpecialization();
     }
 
+    public Room.RoomGender getAssignedRoomGender()
+    {
+        if (bed == null) return null;
+
+        return bed.getRoom().getRoomGender();
+    }
+
     @Override
     public String toString() {
         return String.format("%s assigned %s", patientAdmission, bed);

@@ -20,8 +20,8 @@ public class PatientAdmissionScheduleConstraintTest {
     Department department1 = new Department("General Ward Dep.", specialization1, new ArrayList<>());
     Department department2 = new Department("Intense Care Dep.", specialization2, new ArrayList<>());
 
-    Room room1 = new Room("Room 1", department1, 2, Room.RoomGender.NONE, new ArrayList<>(), new ArrayList<>());
-    Room room2 = new Room("Room 2", department2, 2, Room.RoomGender.NONE, new ArrayList<>(), new ArrayList<>());
+    Room room1 = new Room("Room 1", department1, 2, Room.RoomGender.FEMALE, new ArrayList<>(), new ArrayList<>());
+    Room room2 = new Room("Room 2", department2, 2, Room.RoomGender.MALE, new ArrayList<>(), new ArrayList<>());
 
     Bed bed1 = new Bed(room1, 1);
     Bed bed2 = new Bed(room1, 2);
@@ -156,4 +156,50 @@ public class PatientAdmissionScheduleConstraintTest {
                 .given(bedDesignationA)
                 .penalizesBy(0);
     }
+
+    @Test
+    public void malePatientsInFemaleRoomTest1()
+    {
+        PatientAdmission patientAdmissionB = new PatientAdmission(patientB, night3, night3, specialization1, true);
+        BedDesignation bedDesignationB = new BedDesignation(1, patientAdmissionB, bed1);
+
+        constraintVerifier.verifyThat(PatientAdmissionScheduleConstraintProvider::malePatientsInFemaleRoom)
+                .given(bedDesignationB)
+                .penalizesBy(1);
+    }
+
+    @Test
+    public void malePatientsInFemaleRoomTest2()
+    {
+        PatientAdmission patientAdmissionB = new PatientAdmission(patientB, night3, night3, specialization1, true);
+        BedDesignation bedDesignationB = new BedDesignation(1, patientAdmissionB, bed3);
+
+        constraintVerifier.verifyThat(PatientAdmissionScheduleConstraintProvider::malePatientsInFemaleRoom)
+                .given(bedDesignationB)
+                .penalizesBy(0);
+    }
+
+    @Test
+    public void femalePatientsInMaleRoomTest1()
+    {
+        PatientAdmission patientAdmissionA = new PatientAdmission(patientA, night3, night3, specialization1, true);
+        BedDesignation bedDesignationA = new BedDesignation(1, patientAdmissionA, bed3);
+
+        constraintVerifier.verifyThat(PatientAdmissionScheduleConstraintProvider::femalePatientsInMaleRoom)
+                .given(bedDesignationA)
+                .penalizesBy(1);
+    }
+
+    @Test
+    public void femalePatientsInMaleRoomTest2()
+    {
+        PatientAdmission patientAdmissionA = new PatientAdmission(patientA, night3, night3, specialization1, true);
+        BedDesignation bedDesignationA = new BedDesignation(1, patientAdmissionA, bed1);
+
+        constraintVerifier.verifyThat(PatientAdmissionScheduleConstraintProvider::femalePatientsInMaleRoom)
+                .given(bedDesignationA)
+                .penalizesBy(0);
+    }
+
+
 }

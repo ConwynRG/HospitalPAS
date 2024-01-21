@@ -5,6 +5,8 @@ import ai.timefold.solver.core.api.score.stream.Constraint;
 import ai.timefold.solver.core.api.score.stream.ConstraintFactory;
 import ai.timefold.solver.core.api.score.stream.ConstraintProvider;
 import lv.lu.df.combopt.domain.BedDesignation;
+import lv.lu.df.combopt.domain.Patient;
+import lv.lu.df.combopt.domain.Room;
 
 import java.util.Objects;
 
@@ -18,7 +20,9 @@ public class PatientAdmissionScheduleConstraintProvider implements ConstraintPro
                 assignEveryPatientToBed(constraintFactory),
                 spentNightInSameBed(constraintFactory),
                 patientRequiredSpecializationMet(constraintFactory),
-                patientPreferredSpecializationMet(constraintFactory)
+                patientPreferredSpecializationMet(constraintFactory),
+                malePatientsInFemaleRoom(constraintFactory),
+                femalePatientsInMaleRoom(constraintFactory)
         };
     }
 
@@ -46,6 +50,25 @@ public class PatientAdmissionScheduleConstraintProvider implements ConstraintPro
                 .filter(designation -> !Objects.equals(designation.getDepartmentSpecialization().getName(), designation.getPatientAdmission().getSpecialization().getName()))
                 .penalize(HardSoftScore.ofHard(10), designation -> designation.getPatientAdmission().getNightsSpent())
                 .asConstraint("patientRequiredSpecializationMet");
+    }
+
+    public Constraint malePatientsInFemaleRoom(ConstraintFactory constraintFactory) {
+        return constraintFactory
+                .forEachIncludingNullVars(BedDesignation.class)
+                .filter(designation -> designation.getPatientAdmission().getPatient().getGender() == Patient.PatientGender.MALE)
+                .filter(designation -> designation.getAssignedRoomGender() == Room.RoomGender.FEMALE)
+                .penalize(HardSoftScore.ofHard(50), designation -> designation.getPatientAdmission().getNightsSpent())
+                .asConstraint("malePatientsInFemaleRoom");
+    }
+
+    public Constraint femalePatientsInMaleRoom(ConstraintFactory constraintFactory)
+    {
+        return constraintFactory
+                .forEachIncludingNullVars(BedDesignation.class)
+                .filter(designation -> designation.getPatientAdmission().getPatient().getGender() == Patient.PatientGender.FEMALE)
+                .filter(designation -> designation.getAssignedRoomGender() == Room.RoomGender.MALE)
+                .penalize(HardSoftScore.ofHard(50), designation -> designation.getPatientAdmission().getNightsSpent())
+                .asConstraint("femalePatientsInMaleRoom");
     }
 
     //Soft constraints

@@ -13,6 +13,8 @@ public class PatientAdmissionScheduleConstraintTest {
     Night night1 = new Night(1);
     Night night2 = new Night(2);
     Night night3 = new Night(3);
+    Night night4 = new Night(4);
+
 
     Specialization specialization1 = new Specialization("General");
     Specialization specialization2 = new Specialization("Intense Care");
@@ -201,5 +203,115 @@ public class PatientAdmissionScheduleConstraintTest {
                 .penalizesBy(0);
     }
 
+    @Test
+    public void singleGenderTypeInTheSameGenderRoomTest1()
+    {
+        Patient femaleA = new Patient("A", Patient.PatientGender.FEMALE, 1, new ArrayList<>(), new ArrayList<>());
+        Patient femaleB = new Patient("B", Patient.PatientGender.FEMALE, 1, new ArrayList<>(), new ArrayList<>());
+        Patient maleC = new Patient("C", Patient.PatientGender.MALE, 1, new ArrayList<>(), new ArrayList<>());
+        Patient maleD = new Patient("D", Patient.PatientGender.MALE, 1, new ArrayList<>(), new ArrayList<>());
 
+        PatientAdmission patientAdmissionA = new PatientAdmission(femaleA, night1, night1, specialization1, true);
+        PatientAdmission patientAdmissionB = new PatientAdmission(femaleB, night1, night1, specialization1, true);
+        PatientAdmission patientAdmissionC = new PatientAdmission(maleC, night1, night1, specialization1, true);
+        PatientAdmission patientAdmissionD = new PatientAdmission(maleD, night1, night1, specialization1, true);
+
+        Room sameGenderRoom = new Room("Same Gender Room", department1, 4, Room.RoomGender.SAME_GENDER, new ArrayList<>(), new ArrayList<>());
+
+        Bed bed1 = new Bed(sameGenderRoom, 1);
+        Bed bed2 = new Bed(sameGenderRoom, 2);
+        Bed bed3 = new Bed(sameGenderRoom, 3);
+        Bed bed4 = new Bed(sameGenderRoom, 4);
+
+        BedDesignation bedDesignationA = new BedDesignation(1, patientAdmissionA, bed1);
+        BedDesignation bedDesignationB = new BedDesignation(2, patientAdmissionB, bed2);
+        BedDesignation bedDesignationC = new BedDesignation(3, patientAdmissionC, bed3);
+        BedDesignation bedDesignationD = new BedDesignation(4, patientAdmissionD, bed4);
+
+        constraintVerifier.verifyThat(PatientAdmissionScheduleConstraintProvider::singleGenderTypeInTheSameGenderRoom)
+                .given(bedDesignationA, bedDesignationB, bedDesignationC, bedDesignationD)
+                .penalizesBy(4);
+    }
+
+    @Test
+    public void singleGenderTypeInTheSameGenderRoomTest2()
+    {
+        Patient femaleA = new Patient("A", Patient.PatientGender.FEMALE, 1, new ArrayList<>(), new ArrayList<>());
+        Patient femaleB = new Patient("B", Patient.PatientGender.FEMALE, 1, new ArrayList<>(), new ArrayList<>());
+        Patient maleC = new Patient("C", Patient.PatientGender.MALE, 1, new ArrayList<>(), new ArrayList<>());
+        Patient maleD = new Patient("D", Patient.PatientGender.MALE, 1, new ArrayList<>(), new ArrayList<>());
+
+        PatientAdmission patientAdmissionA = new PatientAdmission(femaleA, night1, night2, specialization1, true);
+        PatientAdmission patientAdmissionB = new PatientAdmission(femaleB, night1, night2, specialization1, true);
+        PatientAdmission patientAdmissionC = new PatientAdmission(maleC, night2, night3, specialization1, true);
+        PatientAdmission patientAdmissionD = new PatientAdmission(maleD, night2, night3, specialization1, true);
+
+        Room sameGenderRoom = new Room("Same Gender Room", department1, 4, Room.RoomGender.SAME_GENDER, new ArrayList<>(), new ArrayList<>());
+
+        Bed bed1 = new Bed(sameGenderRoom, 1);
+        Bed bed2 = new Bed(sameGenderRoom, 2);
+        Bed bed3 = new Bed(sameGenderRoom, 3);
+        Bed bed4 = new Bed(sameGenderRoom, 4);
+
+        BedDesignation bedDesignationA = new BedDesignation(1, patientAdmissionA, bed1);
+        BedDesignation bedDesignationB = new BedDesignation(2, patientAdmissionB, bed2);
+        BedDesignation bedDesignationC = new BedDesignation(3, patientAdmissionC, bed3);
+        BedDesignation bedDesignationD = new BedDesignation(4, patientAdmissionD, bed4);
+
+        constraintVerifier.verifyThat(PatientAdmissionScheduleConstraintProvider::singleGenderTypeInTheSameGenderRoom)
+                .given(bedDesignationA, bedDesignationB, bedDesignationC, bedDesignationD)
+                .penalizesBy(4);
+    }
+
+    @Test
+    public void singleGenderTypeInTheSameGenderRoomTest3()
+    {
+        Patient femaleA = new Patient("A", Patient.PatientGender.FEMALE, 1, new ArrayList<>(), new ArrayList<>());
+        Patient femaleB = new Patient("B", Patient.PatientGender.FEMALE, 1, new ArrayList<>(), new ArrayList<>());
+        Patient maleC = new Patient("C", Patient.PatientGender.MALE, 1, new ArrayList<>(), new ArrayList<>());
+        Patient maleD = new Patient("D", Patient.PatientGender.MALE, 1, new ArrayList<>(), new ArrayList<>());
+
+        PatientAdmission patientAdmissionA = new PatientAdmission(femaleA, night1, night2, specialization1, true);
+        PatientAdmission patientAdmissionB = new PatientAdmission(femaleB, night1, night2, specialization1, true);
+        PatientAdmission patientAdmissionC = new PatientAdmission(maleC, night3, night3, specialization1, true);
+        PatientAdmission patientAdmissionD = new PatientAdmission(maleD, night3, night3, specialization1, true);
+
+        Room sameGenderRoom = new Room("Same Gender Room", department1, 4, Room.RoomGender.SAME_GENDER, new ArrayList<>(), new ArrayList<>());
+
+        Bed bed1 = new Bed(sameGenderRoom, 1);
+        Bed bed2 = new Bed(sameGenderRoom, 2);
+        Bed bed3 = new Bed(sameGenderRoom, 3);
+        Bed bed4 = new Bed(sameGenderRoom, 4);
+
+        BedDesignation bedDesignationA = new BedDesignation(1, patientAdmissionA, bed1);
+        BedDesignation bedDesignationB = new BedDesignation(2, patientAdmissionB, bed2);
+        BedDesignation bedDesignationC = new BedDesignation(3, patientAdmissionC, bed3);
+        BedDesignation bedDesignationD = new BedDesignation(4, patientAdmissionD, bed4);
+
+        constraintVerifier.verifyThat(PatientAdmissionScheduleConstraintProvider::singleGenderTypeInTheSameGenderRoom)
+                .given(bedDesignationA, bedDesignationB, bedDesignationC, bedDesignationD)
+                .penalizesBy(0);
+    }
+
+    @Test
+    public void singleGenderTypeInTheSameGenderRoomTest4()
+    {
+        Patient femaleA = new Patient("A", Patient.PatientGender.FEMALE, 1, new ArrayList<>(), new ArrayList<>());
+        Patient maleC = new Patient("C", Patient.PatientGender.MALE, 1, new ArrayList<>(), new ArrayList<>());
+
+        PatientAdmission patientAdmissionA = new PatientAdmission(femaleA, night1, night3, specialization1, true);
+        PatientAdmission patientAdmissionC = new PatientAdmission(maleC, night2, night4, specialization1, true);
+
+        Room sameGenderRoom = new Room("Same Gender Room", department1, 2, Room.RoomGender.SAME_GENDER, new ArrayList<>(), new ArrayList<>());
+
+        Bed bed1 = new Bed(sameGenderRoom, 1);
+        Bed bed2 = new Bed(sameGenderRoom, 2);
+
+        BedDesignation bedDesignationA = new BedDesignation(1, patientAdmissionA, bed1);
+        BedDesignation bedDesignationC = new BedDesignation(2, patientAdmissionC, bed2);
+
+        constraintVerifier.verifyThat(PatientAdmissionScheduleConstraintProvider::singleGenderTypeInTheSameGenderRoom)
+                .given(bedDesignationA, bedDesignationC)
+                .penalizesBy(2);
+    }
 }

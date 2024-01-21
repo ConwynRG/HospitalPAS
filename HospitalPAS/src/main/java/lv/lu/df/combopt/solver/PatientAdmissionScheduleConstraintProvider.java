@@ -10,7 +10,7 @@ import lv.lu.df.combopt.domain.Room;
 
 import java.util.Objects;
 
-import static ai.timefold.solver.core.api.score.stream.Joiners.equal;
+import static ai.timefold.solver.core.api.score.stream.Joiners.*;
 
 public class PatientAdmissionScheduleConstraintProvider implements ConstraintProvider {
 
@@ -22,7 +22,8 @@ public class PatientAdmissionScheduleConstraintProvider implements ConstraintPro
                 patientRequiredSpecializationMet(constraintFactory),
                 patientPreferredSpecializationMet(constraintFactory),
                 malePatientsInFemaleRoom(constraintFactory),
-                femalePatientsInMaleRoom(constraintFactory)
+                femalePatientsInMaleRoom(constraintFactory),
+                singleGenderTypeInTheSameGenderRoom(constraintFactory)
         };
     }
 
@@ -69,6 +70,22 @@ public class PatientAdmissionScheduleConstraintProvider implements ConstraintPro
                 .filter(designation -> designation.getAssignedRoomGender() == Room.RoomGender.MALE)
                 .penalize(HardSoftScore.ofHard(50), designation -> designation.getPatientAdmission().getNightsSpent())
                 .asConstraint("femalePatientsInMaleRoom");
+    }
+
+    public Constraint singleGenderTypeInTheSameGenderRoom(ConstraintFactory constraintFactory) {
+        return constraintFactory
+                .forEach(BedDesignation.class)
+                .filter(designation -> designation.getAssignedRoomGender() == Room.RoomGender.SAME_GENDER)
+                .join(constraintFactory
+                            .forEach(BedDesignation.class)
+                            .filter(designation -> designation.getAssignedRoomGender() == Room.RoomGender.SAME_GENDER),
+                        equal(BedDesignation::getRoom),
+                        lessThan(BedDesignation::getId),
+                        filtering((designation1, designation2) -> designation1.getPatientAdmission().getPatient().getGender() != designation2.getPatientAdmission().getPatient().getGender()
+                                && designation1.getPatientAdmission().getSharedNightCount(designation2.getPatientAdmission()) > 0))
+                .penalize(HardSoftScore.ofHard(50),
+                        (designation1, designation2) -> designation1.getPatientAdmission().getSharedNightCount(designation2.getPatientAdmission()))
+                .asConstraint("singleGenderTypeInTheSameGenderRoom");
     }
 
     //Soft constraints

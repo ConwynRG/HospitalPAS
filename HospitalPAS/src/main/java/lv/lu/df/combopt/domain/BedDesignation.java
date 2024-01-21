@@ -26,6 +26,13 @@ public class BedDesignation {
         return bed.getRoom().getDepartment().getSpecialization();
     }
 
+    public Room getRoom()
+    {
+        if (bed == null) return null;
+
+        return bed.getRoom();
+    }
+
     public Room.RoomGender getAssignedRoomGender()
     {
         if (bed == null) return null;

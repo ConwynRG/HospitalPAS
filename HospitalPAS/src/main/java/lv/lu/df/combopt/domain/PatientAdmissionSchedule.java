@@ -100,7 +100,7 @@ public class PatientAdmissionSchedule {
         Department department1 = new Department("General Ward Dep.", specialization1, new ArrayList<>());
         Department department2 = new Department("Intense Care Dep.", specialization2, new ArrayList<>());
 
-        Room room1 = new Room("Room 11", department1, 2, Room.RoomGender.FEMALE, new ArrayList<>(), new ArrayList<>());
+        Room room1 = new Room("Room 11", department1, 2, Room.RoomGender.SAME_GENDER, new ArrayList<>(), new ArrayList<>());
         Room room2 = new Room("Room 21", department2, 2, Room.RoomGender.MALE, new ArrayList<>(), new ArrayList<>());
         Room room3 = new Room("Room 12", department1, 1, Room.RoomGender.MALE, new ArrayList<>(), new ArrayList<>());
         Room room4 = new Room("Room 22", department2, 1, Room.RoomGender.FEMALE, new ArrayList<>(), new ArrayList<>());

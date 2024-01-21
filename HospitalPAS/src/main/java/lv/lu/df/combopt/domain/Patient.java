@@ -1,4 +1,4 @@
-package lv.lu.ld.combopt.domain;
+package lv.lu.df.combopt.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,16 +8,15 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class Room {
-    public enum RoomGender {MALE, FEMALE, SAME_GENDER, NONE}
+public class Patient {
+    public enum PatientGender {MALE, FEMALE}
 
     private String name;
-    private Department department;
-    private int capacity;
-    private RoomGender roomGender;
+    private PatientGender gender;
+    private int preferredMaxRoomSize;
 
-    private List<Bed> beds;
-    private List<RoomEquipment> roomEquipments;
+    private List<RequiredEquipment> requiredEquipments;
+    private List<PreferredEquipment> preferredEquipments;
 
     @Override
     public String toString() {

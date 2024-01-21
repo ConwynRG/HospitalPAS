@@ -1,10 +1,10 @@
-package lv.lu.ld.combopt.solver;
+package lv.lu.df.combopt.solver;
 
 import ai.timefold.solver.core.api.score.buildin.hardsoft.HardSoftScore;
 import ai.timefold.solver.core.api.score.stream.Constraint;
 import ai.timefold.solver.core.api.score.stream.ConstraintFactory;
 import ai.timefold.solver.core.api.score.stream.ConstraintProvider;
-import lv.lu.ld.combopt.domain.BedDesignation;
+import lv.lu.df.combopt.domain.BedDesignation;
 
 import java.util.Objects;
 

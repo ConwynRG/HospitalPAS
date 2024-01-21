@@ -1,4 +1,4 @@
-package lv.lu.ld.combopt;
+package lv.lu.df.combopt;
 
 import ai.timefold.solver.core.api.score.ScoreExplanation;
 import ai.timefold.solver.core.api.score.buildin.hardsoft.HardSoftScore;
@@ -8,9 +8,9 @@ import ai.timefold.solver.core.api.solver.SolverFactory;
 import ai.timefold.solver.core.config.solver.EnvironmentMode;
 import ai.timefold.solver.core.config.solver.SolverConfig;
 import ai.timefold.solver.core.config.solver.termination.TerminationConfig;
-import lv.lu.ld.combopt.domain.BedDesignation;
-import lv.lu.ld.combopt.domain.PatientAdmissionSchedule;
-import lv.lu.ld.combopt.solver.PatientAdmissionScheduleConstraintProvider;
+import lv.lu.df.combopt.domain.BedDesignation;
+import lv.lu.df.combopt.domain.PatientAdmissionSchedule;
+import lv.lu.df.combopt.solver.PatientAdmissionScheduleConstraintProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

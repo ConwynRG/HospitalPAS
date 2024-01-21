@@ -1,4 +1,4 @@
-package lv.lu.ld.combopt.domain;
+package lv.lu.df.combopt.domain;
 
 import ai.timefold.solver.core.api.domain.solution.PlanningEntityCollectionProperty;
 import ai.timefold.solver.core.api.domain.solution.PlanningScore;
@@ -9,12 +9,11 @@ import ai.timefold.solver.core.api.score.buildin.hardsoft.HardSoftScore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lv.lu.df.combopt.Main;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
-import static lv.lu.ld.combopt.Main.LOGGER;
 
 @PlanningSolution
 @Getter @Setter @NoArgsConstructor
@@ -65,14 +64,14 @@ public class PatientAdmissionSchedule {
         List<BedDesignation> designations = this.getBedDesignations().stream().sorted(Comparator.comparingInt(dest -> dest.getPatientAdmission().getArrivalNight().getNumber())).toList();
 
         designations.forEach(designation -> {
-            LOGGER.info(designation.getPatientAdmission().getPatient().getName()
+            Main.LOGGER.info(designation.getPatientAdmission().getPatient().getName()
                     + ", arrival: " + designation.getPatientAdmission().getArrivalNight()
                     + ", departure: " + designation.getPatientAdmission().getDepartureNight()
                     + ", specialization: " + designation.getPatientAdmission().getSpecialization()
                     + (designation.getPatientAdmission().getIsSpecializationRequired() ? "(required)" : ""));
 
 
-            LOGGER.info("    " + (designation.getBed() != null
+            Main.LOGGER.info("    " + (designation.getBed() != null
                         ? designation.getBed().getRoom().getDepartment()
                             + " (" +  designation.getBed().getRoom().getDepartment().getSpecialization() + ")"
                         : "")

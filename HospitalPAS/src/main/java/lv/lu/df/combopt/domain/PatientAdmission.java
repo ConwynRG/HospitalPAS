@@ -1,4 +1,4 @@
-package lv.lu.ld.combopt.domain;
+package lv.lu.df.combopt.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

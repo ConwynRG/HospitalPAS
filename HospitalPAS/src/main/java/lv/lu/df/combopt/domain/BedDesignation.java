@@ -1,4 +1,4 @@
-package lv.lu.ld.combopt.domain;
+package lv.lu.df.combopt.domain;
 
 import ai.timefold.solver.core.api.domain.entity.PlanningEntity;
 import ai.timefold.solver.core.api.domain.lookup.PlanningId;

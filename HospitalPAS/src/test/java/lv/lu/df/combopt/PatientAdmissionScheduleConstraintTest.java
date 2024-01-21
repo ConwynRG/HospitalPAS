@@ -424,4 +424,40 @@ public class PatientAdmissionScheduleConstraintTest {
                 .given(bedDesignation, preferredEquipment1, preferredEquipment2)
                 .penalizesBy(2);
     }
+
+    @Test
+    public void preferredRoomCapacityTest1()
+    {
+        Patient patient = new Patient("A", Patient.PatientGender.FEMALE, 2, new ArrayList<>(), new ArrayList<>());
+
+        PatientAdmission patientAdmission = new PatientAdmission(patient, night1, night3, specialization1, true);
+
+        Room room = new Room("Same Gender Room", department1, 2, Room.RoomGender.SAME_GENDER, new ArrayList<>(), new ArrayList<>());
+
+        Bed bed1 = new Bed(room, 1);
+
+        BedDesignation bedDesignation = new BedDesignation(1, patientAdmission, bed1);
+
+        constraintVerifier.verifyThat(PatientAdmissionScheduleConstraintProvider::preferredRoomCapacity)
+                .given(bedDesignation)
+                .penalizesBy(0);
+    }
+
+    @Test
+    public void preferredRoomCapacityTest2()
+    {
+        Patient patient = new Patient("A", Patient.PatientGender.FEMALE, 1, new ArrayList<>(), new ArrayList<>());
+
+        PatientAdmission patientAdmission = new PatientAdmission(patient, night1, night1, specialization1, true);
+
+        Room room = new Room("Same Gender Room", department1, 2, Room.RoomGender.SAME_GENDER, new ArrayList<>(), new ArrayList<>());
+
+        Bed bed1 = new Bed(room, 1);
+
+        BedDesignation bedDesignation = new BedDesignation(1, patientAdmission, bed1);
+
+        constraintVerifier.verifyThat(PatientAdmissionScheduleConstraintProvider::preferredRoomCapacity)
+                .given(bedDesignation)
+                .penalizesBy(1);
+    }
 }

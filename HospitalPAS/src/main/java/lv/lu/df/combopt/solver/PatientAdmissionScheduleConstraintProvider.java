@@ -23,7 +23,8 @@ public class PatientAdmissionScheduleConstraintProvider implements ConstraintPro
                 femalePatientsInMaleRoom(constraintFactory),
                 singleGenderTypeInTheSameGenderRoom(constraintFactory),
                 patientHasRequiredEquipment(constraintFactory),
-                patientHasPreferredEquipment(constraintFactory)
+                patientHasPreferredEquipment(constraintFactory),
+                preferredRoomCapacity(constraintFactory)
         };
     }
 
@@ -122,5 +123,13 @@ public class PatientAdmissionScheduleConstraintProvider implements ConstraintPro
                 .penalize(HardSoftScore.ofSoft(50),
                         (roomEquipment, designation) -> designation.getPatientAdmission().getNightsSpent())
                 .asConstraint("patientHasPreferredEquipment");
+    }
+
+    public Constraint preferredRoomCapacity(ConstraintFactory constraintFactory) {
+        return constraintFactory
+                .forEach(BedDesignation.class)
+                .filter(designation -> designation.getPatientAdmission().getPatient().getPreferredMaxRoomSize() < designation.getRoom().getCapacity())
+                .penalize(HardSoftScore.ofSoft(10), designation -> designation.getPatientAdmission().getNightsSpent())
+                .asConstraint("preferredRoomCapacity");
     }
 }

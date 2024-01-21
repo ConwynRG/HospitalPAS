@@ -74,8 +74,9 @@ public class PatientAdmissionSchedule {
                         ? ", Required eq.: " + String.join(", ", designation.getPatientAdmission().getPatient().getRequiredEquipments().stream().map(RequiredEquipment::toString).toList())
                         : "")
                     + (!designation.getPatientAdmission().getPatient().getPreferredEquipments().isEmpty()
-                    ? ", Preferred eq.: " +String.join(", ", designation.getPatientAdmission().getPatient().getPreferredEquipments().stream().map(PreferredEquipment::toString).toList())
-                    : "")
+                        ? ", Preferred eq.: " +String.join(", ", designation.getPatientAdmission().getPatient().getPreferredEquipments().stream().map(PreferredEquipment::toString).toList())
+                        : "")
+                    + ", preferred capacity: " + designation.getPatientAdmission().getPatient().getPreferredMaxRoomSize()
             );
 
 
@@ -86,6 +87,7 @@ public class PatientAdmissionSchedule {
                             + (!designation.getBed().getRoom().getRoomEquipments().isEmpty()
                                 ? ", Available eq.: " +String.join(", ", designation.getBed().getRoom().getRoomEquipments().stream().map(RoomEquipment::toString).toList())
                                 : "")
+                            + ", room capacity: " + designation.getBed().getRoom().getCapacity()
                         : "The bed isn't assigned"));
         });
     }
@@ -132,12 +134,12 @@ public class PatientAdmissionSchedule {
 
         Patient patientA = new Patient("A", Patient.PatientGender.FEMALE, 1, new ArrayList<>(), new ArrayList<>());
         Patient patientB = new Patient("B", Patient.PatientGender.MALE, 1, new ArrayList<>(), new ArrayList<>());
-        Patient patientC = new Patient("C", Patient.PatientGender.MALE, 1, new ArrayList<>(), new ArrayList<>());
+        Patient patientC = new Patient("C", Patient.PatientGender.MALE, 2, new ArrayList<>(), new ArrayList<>());
         Patient patientD = new Patient("D", Patient.PatientGender.MALE, 1, new ArrayList<>(), new ArrayList<>());
-        Patient patientE = new Patient("E", Patient.PatientGender.FEMALE, 1, new ArrayList<>(), new ArrayList<>());
+        Patient patientE = new Patient("E", Patient.PatientGender.FEMALE, 2, new ArrayList<>(), new ArrayList<>());
         Patient patientF = new Patient("F", Patient.PatientGender.MALE, 1, new ArrayList<>(), new ArrayList<>());
-        Patient patientG = new Patient("G", Patient.PatientGender.MALE, 1, new ArrayList<>(), new ArrayList<>());
-        Patient patientH = new Patient("H", Patient.PatientGender.MALE, 1, new ArrayList<>(), new ArrayList<>());
+        Patient patientG = new Patient("G", Patient.PatientGender.MALE, 2, new ArrayList<>(), new ArrayList<>());
+        Patient patientH = new Patient("H", Patient.PatientGender.MALE, 2, new ArrayList<>(), new ArrayList<>());
         Patient patientI = new Patient("I", Patient.PatientGender.FEMALE, 1, new ArrayList<>(), new ArrayList<>());
 
         PatientAdmission patientAdmissionA = new PatientAdmission(patientA, night1, night6, specialization2, true);

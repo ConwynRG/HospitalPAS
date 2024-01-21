@@ -4,9 +4,7 @@ import ai.timefold.solver.core.api.score.buildin.hardsoft.HardSoftScore;
 import ai.timefold.solver.core.api.score.stream.Constraint;
 import ai.timefold.solver.core.api.score.stream.ConstraintFactory;
 import ai.timefold.solver.core.api.score.stream.ConstraintProvider;
-import lv.lu.df.combopt.domain.BedDesignation;
-import lv.lu.df.combopt.domain.Patient;
-import lv.lu.df.combopt.domain.Room;
+import lv.lu.df.combopt.domain.*;
 
 import java.util.Objects;
 
@@ -23,7 +21,9 @@ public class PatientAdmissionScheduleConstraintProvider implements ConstraintPro
                 patientPreferredSpecializationMet(constraintFactory),
                 malePatientsInFemaleRoom(constraintFactory),
                 femalePatientsInMaleRoom(constraintFactory),
-                singleGenderTypeInTheSameGenderRoom(constraintFactory)
+                singleGenderTypeInTheSameGenderRoom(constraintFactory),
+                patientHasRequiredEquipment(constraintFactory),
+                patientHasPreferredEquipment(constraintFactory)
         };
     }
 
@@ -88,6 +88,19 @@ public class PatientAdmissionScheduleConstraintProvider implements ConstraintPro
                 .asConstraint("singleGenderTypeInTheSameGenderRoom");
     }
 
+    public Constraint patientHasRequiredEquipment(ConstraintFactory constraintFactory) {
+        return constraintFactory
+                .forEach(RequiredEquipment.class)
+                .join(BedDesignation.class,
+                        equal(RequiredEquipment::getPatient, (designation) -> designation.getPatientAdmission().getPatient()))
+                .ifNotExists(RoomEquipment.class,
+                        equal((requiredEquipment, designation) -> designation.getRoom(), RoomEquipment::getRoom),
+                        equal((requiredEquipment, designation) -> requiredEquipment.getEquipment(), RoomEquipment::getEquipment))
+                .penalize(HardSoftScore.ofHard(50),
+                        (roomEquipment, designation) -> designation.getPatientAdmission().getNightsSpent())
+                .asConstraint("patientHasRequiredEquipment");
+    }
+
     //Soft constraints
     public Constraint patientPreferredSpecializationMet(ConstraintFactory constraintFactory) {
         return constraintFactory
@@ -96,5 +109,18 @@ public class PatientAdmissionScheduleConstraintProvider implements ConstraintPro
                 .filter(designation -> !Objects.equals(designation.getDepartmentSpecialization().getName(), designation.getPatientAdmission().getSpecialization().getName()))
                 .penalize(HardSoftScore.ofSoft(10), designation -> designation.getPatientAdmission().getNightsSpent())
                 .asConstraint("patientPreferredSpecializationMet");
+    }
+
+    public Constraint patientHasPreferredEquipment(ConstraintFactory constraintFactory) {
+        return constraintFactory
+                .forEach(PreferredEquipment.class)
+                .join(BedDesignation.class,
+                        equal(PreferredEquipment::getPatient, (designation) -> designation.getPatientAdmission().getPatient()))
+                .ifNotExists(RoomEquipment.class,
+                        equal((preferredEquipment, designation) -> designation.getRoom(), RoomEquipment::getRoom),
+                        equal((preferredEquipment, designation) -> preferredEquipment.getEquipment(), RoomEquipment::getEquipment))
+                .penalize(HardSoftScore.ofSoft(50),
+                        (roomEquipment, designation) -> designation.getPatientAdmission().getNightsSpent())
+                .asConstraint("patientHasPreferredEquipment");
     }
 }

@@ -314,4 +314,114 @@ public class PatientAdmissionScheduleConstraintTest {
                 .given(bedDesignationA, bedDesignationC)
                 .penalizesBy(2);
     }
+
+    @Test
+    public void requiredEquipmentTest1()
+    {
+        Patient patient = new Patient("A", Patient.PatientGender.FEMALE, 1, new ArrayList<>(), new ArrayList<>());
+
+        Equipment equipment1 = new Equipment("telemetry");
+        Equipment equipment2 = new Equipment("oxygen");
+
+        Room roomWithEquipment = new Room("Room with Equipment", department1, 1, Room.RoomGender.SAME_GENDER, new ArrayList<>(), new ArrayList<>());
+
+        RoomEquipment roomEquipment1 = new RoomEquipment(roomWithEquipment, equipment1);
+        RoomEquipment roomEquipment2 = new RoomEquipment(roomWithEquipment, equipment2);
+
+        roomWithEquipment.getRoomEquipments().addAll(List.of(roomEquipment1, roomEquipment2));
+
+        RequiredEquipment requiredEquipment1 = new RequiredEquipment(patient, equipment1);
+        RequiredEquipment requiredEquipment2 = new RequiredEquipment(patient, equipment2);
+
+        patient.getRequiredEquipments().addAll(List.of(requiredEquipment1, requiredEquipment2));
+
+        Bed bed = new Bed(roomWithEquipment, 1);
+        PatientAdmission patientAdmission = new PatientAdmission(patient, night1, night3, specialization1, true);
+        BedDesignation bedDesignation = new BedDesignation(1, patientAdmission, bed);
+
+
+        constraintVerifier.verifyThat(PatientAdmissionScheduleConstraintProvider::patientHasRequiredEquipment)
+                .given(bedDesignation, requiredEquipment1, requiredEquipment2, roomEquipment1, roomEquipment2)
+                .penalizesBy(0);
+    }
+
+    @Test
+    public void requiredEquipmentTest2()
+    {
+        Patient patient = new Patient("A", Patient.PatientGender.FEMALE, 1, new ArrayList<>(), new ArrayList<>());
+
+        Equipment equipment1 = new Equipment("telemetry");
+        Equipment equipment2 = new Equipment("oxygen");
+
+        Room roomWithEquipment = new Room("Room with Equipment", department1, 1, Room.RoomGender.SAME_GENDER, new ArrayList<>(), new ArrayList<>());
+
+        RequiredEquipment requiredEquipment1 = new RequiredEquipment(patient, equipment1);
+        RequiredEquipment requiredEquipment2 = new RequiredEquipment(patient, equipment2);
+
+        patient.getRequiredEquipments().addAll(List.of(requiredEquipment1, requiredEquipment2));
+
+        Bed bed = new Bed(roomWithEquipment, 1);
+        PatientAdmission patientAdmission = new PatientAdmission(patient, night1, night1, specialization1, true);
+        BedDesignation bedDesignation = new BedDesignation(1, patientAdmission, bed);
+
+
+        constraintVerifier.verifyThat(PatientAdmissionScheduleConstraintProvider::patientHasRequiredEquipment)
+                .given(bedDesignation, requiredEquipment1, requiredEquipment2)
+                .penalizesBy(2);
+    }
+
+    @Test
+    public void preferredEquipmentTest1()
+    {
+        Patient patient = new Patient("A", Patient.PatientGender.FEMALE, 1, new ArrayList<>(), new ArrayList<>());
+
+        Equipment equipment1 = new Equipment("telemetry");
+        Equipment equipment2 = new Equipment("oxygen");
+
+        Room roomWithEquipment = new Room("Room with Equipment", department1, 1, Room.RoomGender.SAME_GENDER, new ArrayList<>(), new ArrayList<>());
+
+        RoomEquipment roomEquipment1 = new RoomEquipment(roomWithEquipment, equipment1);
+        RoomEquipment roomEquipment2 = new RoomEquipment(roomWithEquipment, equipment2);
+
+        roomWithEquipment.getRoomEquipments().addAll(List.of(roomEquipment1, roomEquipment2));
+
+        PreferredEquipment preferredEquipment1 = new PreferredEquipment(patient, equipment1);
+        PreferredEquipment preferredEquipment2 = new PreferredEquipment(patient, equipment2);
+
+        patient.getPreferredEquipments().addAll(List.of(preferredEquipment1, preferredEquipment2));
+
+        Bed bed = new Bed(roomWithEquipment, 1);
+        PatientAdmission patientAdmission = new PatientAdmission(patient, night1, night3, specialization1, true);
+        BedDesignation bedDesignation = new BedDesignation(1, patientAdmission, bed);
+
+
+        constraintVerifier.verifyThat(PatientAdmissionScheduleConstraintProvider::patientHasPreferredEquipment)
+                .given(bedDesignation, preferredEquipment1, preferredEquipment2, roomEquipment1, roomEquipment2)
+                .penalizesBy(0);
+    }
+
+    @Test
+    public void preferredEquipmentTest2()
+    {
+        Patient patient = new Patient("A", Patient.PatientGender.FEMALE, 1, new ArrayList<>(), new ArrayList<>());
+
+        Equipment equipment1 = new Equipment("telemetry");
+        Equipment equipment2 = new Equipment("oxygen");
+
+        Room roomWithEquipment = new Room("Room with Equipment", department1, 1, Room.RoomGender.SAME_GENDER, new ArrayList<>(), new ArrayList<>());
+
+        PreferredEquipment preferredEquipment1 = new PreferredEquipment(patient, equipment1);
+        PreferredEquipment preferredEquipment2 = new PreferredEquipment(patient, equipment2);
+
+        patient.getPreferredEquipments().addAll(List.of(preferredEquipment1, preferredEquipment2));
+
+        Bed bed = new Bed(roomWithEquipment, 1);
+        PatientAdmission patientAdmission = new PatientAdmission(patient, night1, night1, specialization1, true);
+        BedDesignation bedDesignation = new BedDesignation(1, patientAdmission, bed);
+
+
+        constraintVerifier.verifyThat(PatientAdmissionScheduleConstraintProvider::patientHasPreferredEquipment)
+                .given(bedDesignation, preferredEquipment1, preferredEquipment2)
+                .penalizesBy(2);
+    }
 }

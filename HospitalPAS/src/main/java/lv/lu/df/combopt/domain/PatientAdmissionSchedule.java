@@ -69,13 +69,23 @@ public class PatientAdmissionSchedule {
                     + ", departure: " + designation.getPatientAdmission().getDepartureNight()
                     + ", specialization: " + designation.getPatientAdmission().getSpecialization()
                     + (designation.getPatientAdmission().getIsSpecializationRequired() ? "(required)" : "")
-                    + ", gender: " + designation.getPatientAdmission().getPatient().getGender().name());
+                    + ", gender: " + designation.getPatientAdmission().getPatient().getGender().name()
+                    + (!designation.getPatientAdmission().getPatient().getRequiredEquipments().isEmpty()
+                        ? ", Required eq.: " + String.join(", ", designation.getPatientAdmission().getPatient().getRequiredEquipments().stream().map(RequiredEquipment::toString).toList())
+                        : "")
+                    + (!designation.getPatientAdmission().getPatient().getPreferredEquipments().isEmpty()
+                    ? ", Preferred eq.: " +String.join(", ", designation.getPatientAdmission().getPatient().getPreferredEquipments().stream().map(PreferredEquipment::toString).toList())
+                    : "")
+            );
 
 
             Main.LOGGER.info("    " + (designation.getBed() != null
                         ? designation.getBed().getRoom().getDepartment()
                             + " (" +  designation.getBed().getRoom().getDepartment().getSpecialization() + ")"
                             + " - " + designation.getBed() + " (" + designation.getBed().getRoom().getRoomGender().name() + ")"
+                            + (!designation.getBed().getRoom().getRoomEquipments().isEmpty()
+                                ? ", Available eq.: " +String.join(", ", designation.getBed().getRoom().getRoomEquipments().stream().map(RoomEquipment::toString).toList())
+                                : "")
                         : "The bed isn't assigned"));
         });
     }
@@ -150,6 +160,27 @@ public class PatientAdmissionSchedule {
         BedDesignation bedDesignationH = new BedDesignation(8, patientAdmissionH, null);
         BedDesignation bedDesignationI = new BedDesignation(9,patientAdmissionI, null);
 
+        Equipment equipment1 = new Equipment("telemetry");
+        Equipment equipment2 = new Equipment("oxygen");
+
+        RoomEquipment roomEquipment1 = new RoomEquipment(room3, equipment1);
+        RoomEquipment roomEquipment2 = new RoomEquipment(room4, equipment2);
+
+        room3.getRoomEquipments().add(roomEquipment1);
+        room4.getRoomEquipments().add(roomEquipment2);
+
+        RequiredEquipment requiredEquipment1 = new RequiredEquipment(patientA, equipment2);
+        RequiredEquipment requiredEquipment2 = new RequiredEquipment(patientH, equipment1);
+
+        patientA.getRequiredEquipments().add(requiredEquipment1);
+        patientH.getRequiredEquipments().add(requiredEquipment2);
+
+        PreferredEquipment preferredEquipment1 = new PreferredEquipment(patientI, equipment2);
+        PreferredEquipment preferredEquipment2 = new PreferredEquipment(patientE, equipment1);
+
+        patientI.getPreferredEquipments().add(preferredEquipment1);
+        patientE.getPreferredEquipments().add(preferredEquipment2);
+
         problem.getNights().addAll(List.of(night1, night2, night3, night4, night5, night6, night7));
         problem.getSpecializations().addAll(List.of(specialization1, specialization2));
         problem.getDepartments().addAll(List.of(department1, department2));
@@ -160,6 +191,10 @@ public class PatientAdmissionSchedule {
                 patientAdmissionF, patientAdmissionG, patientAdmissionH, patientAdmissionI));
         problem.getBedDesignations().addAll(List.of(bedDesignationA, bedDesignationB, bedDesignationC, bedDesignationD, bedDesignationE, bedDesignationF, bedDesignationG,
                 bedDesignationH, bedDesignationI));
+        problem.getEquipments().addAll(List.of(equipment1, equipment2));
+        problem.getRoomEquipments().addAll(List.of(roomEquipment1, roomEquipment2));
+        problem.getRequiredEquipments().addAll(List.of(requiredEquipment1, requiredEquipment2));
+        problem.getPreferredEquipments().addAll(List.of(preferredEquipment1, preferredEquipment2));
 
         return problem;
     }

@@ -17,10 +17,10 @@ public class PatientAdmission {
     @JsonIdentityReference
     private Patient patient;
 
-    @JsonIdentityReference
+    @JsonIdentityReference(alwaysAsId = true)
     private Night arrivalNight;
 
-    @JsonIdentityReference
+    @JsonIdentityReference(alwaysAsId = true)
     private Night departureNight;
 
     @JsonIdentityReference

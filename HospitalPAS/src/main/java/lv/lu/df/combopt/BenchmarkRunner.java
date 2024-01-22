@@ -1,6 +1,5 @@
 package lv.lu.df.combopt;
 
-import ai.timefold.solver.benchmark.api.PlannerBenchmark;
 import ai.timefold.solver.benchmark.api.PlannerBenchmarkFactory;
 import lv.lu.df.combopt.domain.PatientAdmissionSchedule;
 import lv.lu.df.combopt.domain.PatientAdmissionScheduleJsonIO;
@@ -13,11 +12,11 @@ public class BenchmarkRunner {
                 .createFromXmlResource("benchmarkConfiguration.xml");
 
         PatientAdmissionScheduleJsonIO routingSolutionJsonIO = new PatientAdmissionScheduleJsonIO();
-        routingSolutionJsonIO.write(PatientAdmissionSchedule.generateData(10),
-                new File("data/classExample10.json"));
-
+        routingSolutionJsonIO.write(PatientAdmissionSchedule.generateData(50),
+                new File("data/testData3.json"));
+/*
         PlannerBenchmark benchmark = benchmarkFactoryFromXML.buildPlannerBenchmark();
 
-        benchmark.benchmarkAndShowReportInBrowser();
+        benchmark.benchmarkAndShowReportInBrowser();*/
     }
 }

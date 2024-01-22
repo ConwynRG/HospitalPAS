@@ -19,11 +19,11 @@ public class BedDesignation {
     @PlanningId
     private int id;
 
-    @JsonIdentityReference
+    @JsonIdentityReference(alwaysAsId = false)
     private PatientAdmission patientAdmission;
 
     @PlanningVariable
-    @JsonIdentityReference
+    @JsonIdentityReference(alwaysAsId = false)
     private Bed bed;
 
     @JsonIgnore

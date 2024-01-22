@@ -1,0 +1,710 @@
+{
+  "solutionId" : "1",
+  "score" : null,
+  "bedDesignations" : [ {
+    "id" : 1,
+    "patientAdmission" : {
+      "id" : 1,
+      "patient" : {
+        "name" : "Patient_1",
+        "gender" : "FEMALE",
+        "preferredMaxRoomSize" : 5,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : {
+        "number" : 12
+      },
+      "departureNight" : 12,
+      "specialization" : {
+        "name" : "Specialization 3"
+      },
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  }, {
+    "id" : 2,
+    "patientAdmission" : {
+      "id" : 2,
+      "patient" : {
+        "name" : "Patient_2",
+        "gender" : "FEMALE",
+        "preferredMaxRoomSize" : 6,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : {
+        "number" : 18
+      },
+      "departureNight" : {
+        "number" : 19
+      },
+      "specialization" : {
+        "name" : "Specialization 1"
+      },
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  }, {
+    "id" : 3,
+    "patientAdmission" : {
+      "id" : 3,
+      "patient" : {
+        "name" : "Patient_3",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 5,
+        "requiredEquipments" : [ {
+          "id" : 1,
+          "patient" : "Patient_3",
+          "equipment" : {
+            "name" : "Equipment 3"
+          }
+        } ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : 19,
+      "departureNight" : {
+        "number" : 20
+      },
+      "specialization" : "Specialization 3",
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  }, {
+    "id" : 4,
+    "patientAdmission" : {
+      "id" : 4,
+      "patient" : {
+        "name" : "Patient_4",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 4,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : {
+        "number" : 2
+      },
+      "departureNight" : 2,
+      "specialization" : {
+        "name" : "Specialization 2"
+      },
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  }, {
+    "id" : 5,
+    "patientAdmission" : {
+      "id" : 5,
+      "patient" : {
+        "name" : "Patient_5",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 5,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ {
+          "id" : 1,
+          "patient" : "Patient_5",
+          "equipment" : "Equipment 3"
+        } ]
+      },
+      "arrivalNight" : {
+        "number" : 17
+      },
+      "departureNight" : 19,
+      "specialization" : "Specialization 2",
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  }, {
+    "id" : 6,
+    "patientAdmission" : {
+      "id" : 6,
+      "patient" : {
+        "name" : "Patient_6",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 3,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : {
+        "number" : 8
+      },
+      "departureNight" : {
+        "number" : 10
+      },
+      "specialization" : "Specialization 3",
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  }, {
+    "id" : 7,
+    "patientAdmission" : {
+      "id" : 7,
+      "patient" : {
+        "name" : "Patient_7",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 6,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : 10,
+      "departureNight" : 12,
+      "specialization" : "Specialization 1",
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  }, {
+    "id" : 8,
+    "patientAdmission" : {
+      "id" : 8,
+      "patient" : {
+        "name" : "Patient_8",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 3,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ {
+          "id" : 2,
+          "patient" : "Patient_8",
+          "equipment" : {
+            "name" : "Equipment 1"
+          }
+        } ]
+      },
+      "arrivalNight" : {
+        "number" : 15
+      },
+      "departureNight" : {
+        "number" : 16
+      },
+      "specialization" : "Specialization 2",
+      "isSpecializationRequired" : true
+    },
+    "bed" : null
+  }, {
+    "id" : 9,
+    "patientAdmission" : {
+      "id" : 9,
+      "patient" : {
+        "name" : "Patient_9",
+        "gender" : "FEMALE",
+        "preferredMaxRoomSize" : 5,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ {
+          "id" : 3,
+          "patient" : "Patient_9",
+          "equipment" : "Equipment 1"
+        } ]
+      },
+      "arrivalNight" : 10,
+      "departureNight" : {
+        "number" : 11
+      },
+      "specialization" : "Specialization 1",
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  }, {
+    "id" : 10,
+    "patientAdmission" : {
+      "id" : 10,
+      "patient" : {
+        "name" : "Patient_10",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 5,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ {
+          "id" : 4,
+          "patient" : "Patient_10",
+          "equipment" : "Equipment 1"
+        } ]
+      },
+      "arrivalNight" : {
+        "number" : 13
+      },
+      "departureNight" : 15,
+      "specialization" : "Specialization 2",
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  }, {
+    "id" : 11,
+    "patientAdmission" : {
+      "id" : 11,
+      "patient" : {
+        "name" : "Patient_11",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 3,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : 17,
+      "departureNight" : 18,
+      "specialization" : "Specialization 3",
+      "isSpecializationRequired" : true
+    },
+    "bed" : null
+  }, {
+    "id" : 12,
+    "patientAdmission" : {
+      "id" : 12,
+      "patient" : {
+        "name" : "Patient_12",
+        "gender" : "FEMALE",
+        "preferredMaxRoomSize" : 3,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : 10,
+      "departureNight" : 12,
+      "specialization" : "Specialization 2",
+      "isSpecializationRequired" : true
+    },
+    "bed" : null
+  }, {
+    "id" : 13,
+    "patientAdmission" : {
+      "id" : 13,
+      "patient" : {
+        "name" : "Patient_13",
+        "gender" : "FEMALE",
+        "preferredMaxRoomSize" : 4,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : {
+        "number" : 21
+      },
+      "departureNight" : {
+        "number" : 23
+      },
+      "specialization" : "Specialization 2",
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  }, {
+    "id" : 14,
+    "patientAdmission" : {
+      "id" : 14,
+      "patient" : {
+        "name" : "Patient_14",
+        "gender" : "FEMALE",
+        "preferredMaxRoomSize" : 4,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : {
+        "number" : 7
+      },
+      "departureNight" : {
+        "number" : 9
+      },
+      "specialization" : "Specialization 3",
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  }, {
+    "id" : 15,
+    "patientAdmission" : {
+      "id" : 15,
+      "patient" : {
+        "name" : "Patient_15",
+        "gender" : "FEMALE",
+        "preferredMaxRoomSize" : 4,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : 18,
+      "departureNight" : 19,
+      "specialization" : "Specialization 3",
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  }, {
+    "id" : 16,
+    "patientAdmission" : {
+      "id" : 16,
+      "patient" : {
+        "name" : "Patient_16",
+        "gender" : "FEMALE",
+        "preferredMaxRoomSize" : 3,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : {
+        "number" : 14
+      },
+      "departureNight" : 16,
+      "specialization" : "Specialization 3",
+      "isSpecializationRequired" : true
+    },
+    "bed" : null
+  }, {
+    "id" : 17,
+    "patientAdmission" : {
+      "id" : 17,
+      "patient" : {
+        "name" : "Patient_17",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 4,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : 10,
+      "departureNight" : 10,
+      "specialization" : "Specialization 3",
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  }, {
+    "id" : 18,
+    "patientAdmission" : {
+      "id" : 18,
+      "patient" : {
+        "name" : "Patient_18",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 6,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : 11,
+      "departureNight" : 13,
+      "specialization" : "Specialization 1",
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  }, {
+    "id" : 19,
+    "patientAdmission" : {
+      "id" : 19,
+      "patient" : {
+        "name" : "Patient_19",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 4,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : 21,
+      "departureNight" : 23,
+      "specialization" : "Specialization 2",
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  }, {
+    "id" : 20,
+    "patientAdmission" : {
+      "id" : 20,
+      "patient" : {
+        "name" : "Patient_20",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 5,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ {
+          "id" : 5,
+          "patient" : "Patient_20",
+          "equipment" : {
+            "name" : "Equipment 2"
+          }
+        }, {
+          "id" : 6,
+          "patient" : "Patient_20",
+          "equipment" : "Equipment 3"
+        } ]
+      },
+      "arrivalNight" : 18,
+      "departureNight" : 19,
+      "specialization" : "Specialization 2",
+      "isSpecializationRequired" : true
+    },
+    "bed" : null
+  }, {
+    "id" : 21,
+    "patientAdmission" : {
+      "id" : 21,
+      "patient" : {
+        "name" : "Patient_21",
+        "gender" : "FEMALE",
+        "preferredMaxRoomSize" : 3,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : {
+        "number" : 5
+      },
+      "departureNight" : {
+        "number" : 6
+      },
+      "specialization" : "Specialization 2",
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  }, {
+    "id" : 22,
+    "patientAdmission" : {
+      "id" : 22,
+      "patient" : {
+        "name" : "Patient_22",
+        "gender" : "FEMALE",
+        "preferredMaxRoomSize" : 3,
+        "requiredEquipments" : [ {
+          "id" : 2,
+          "patient" : "Patient_22",
+          "equipment" : "Equipment 1"
+        } ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : 16,
+      "departureNight" : 18,
+      "specialization" : "Specialization 3",
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  }, {
+    "id" : 23,
+    "patientAdmission" : {
+      "id" : 23,
+      "patient" : {
+        "name" : "Patient_23",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 5,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : 12,
+      "departureNight" : 12,
+      "specialization" : "Specialization 2",
+      "isSpecializationRequired" : true
+    },
+    "bed" : null
+  }, {
+    "id" : 24,
+    "patientAdmission" : {
+      "id" : 24,
+      "patient" : {
+        "name" : "Patient_24",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 4,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : 23,
+      "departureNight" : 23,
+      "specialization" : "Specialization 3",
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  }, {
+    "id" : 25,
+    "patientAdmission" : {
+      "id" : 25,
+      "patient" : {
+        "name" : "Patient_25",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 3,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ {
+          "id" : 7,
+          "patient" : "Patient_25",
+          "equipment" : "Equipment 1"
+        }, {
+          "id" : 8,
+          "patient" : "Patient_25",
+          "equipment" : "Equipment 2"
+        } ]
+      },
+      "arrivalNight" : {
+        "number" : 3
+      },
+      "departureNight" : {
+        "number" : 4
+      },
+      "specialization" : "Specialization 3",
+      "isSpecializationRequired" : false
+    },
+    "bed" : null
+  } ],
+  "beds" : [ {
+    "id" : 1,
+    "room" : {
+      "name" : "Room 1-1",
+      "department" : {
+        "name" : "Department 1",
+        "specialization" : "Specialization 1",
+        "rooms" : [ "Room 1-1", {
+          "name" : "Room 1-2",
+          "department" : "Department 1",
+          "capacity" : 1,
+          "roomGender" : "MALE",
+          "beds" : [ {
+            "id" : 3,
+            "room" : "Room 1-2",
+            "number" : 1
+          } ],
+          "roomEquipments" : [ ]
+        }, {
+          "name" : "Room 1-3",
+          "department" : "Department 1",
+          "capacity" : 2,
+          "roomGender" : "FEMALE",
+          "beds" : [ {
+            "id" : 4,
+            "room" : "Room 1-3",
+            "number" : 1
+          }, {
+            "id" : 5,
+            "room" : "Room 1-3",
+            "number" : 2
+          } ],
+          "roomEquipments" : [ ]
+        } ]
+      },
+      "capacity" : 2,
+      "roomGender" : "MALE",
+      "beds" : [ 1, {
+        "id" : 2,
+        "room" : "Room 1-1",
+        "number" : 2
+      } ],
+      "roomEquipments" : [ {
+        "id" : 1,
+        "room" : "Room 1-1",
+        "equipment" : "Equipment 1"
+      }, {
+        "id" : 2,
+        "room" : "Room 1-1",
+        "equipment" : "Equipment 2"
+      }, {
+        "id" : 3,
+        "room" : "Room 1-1",
+        "equipment" : "Equipment 3"
+      } ]
+    },
+    "number" : 1
+  }, 2, 3, 4, 5, {
+    "id" : 6,
+    "room" : {
+      "name" : "Room 2-1",
+      "department" : {
+        "name" : "Department 2",
+        "specialization" : "Specialization 2",
+        "rooms" : [ "Room 2-1", {
+          "name" : "Room 2-2",
+          "department" : "Department 2",
+          "capacity" : 2,
+          "roomGender" : "FEMALE",
+          "beds" : [ {
+            "id" : 9,
+            "room" : "Room 2-2",
+            "number" : 1
+          }, {
+            "id" : 10,
+            "room" : "Room 2-2",
+            "number" : 2
+          } ],
+          "roomEquipments" : [ ]
+        }, {
+          "name" : "Room 2-3",
+          "department" : "Department 2",
+          "capacity" : 1,
+          "roomGender" : "MALE",
+          "beds" : [ {
+            "id" : 11,
+            "room" : "Room 2-3",
+            "number" : 1
+          } ],
+          "roomEquipments" : [ ]
+        } ]
+      },
+      "capacity" : 3,
+      "roomGender" : "NONE",
+      "beds" : [ 6, {
+        "id" : 7,
+        "room" : "Room 2-1",
+        "number" : 2
+      }, {
+        "id" : 8,
+        "room" : "Room 2-1",
+        "number" : 3
+      } ],
+      "roomEquipments" : [ ]
+    },
+    "number" : 1
+  }, 7, 8, 9, 10, 11, {
+    "id" : 12,
+    "room" : {
+      "name" : "Room 3-1",
+      "department" : {
+        "name" : "Department 3",
+        "specialization" : "Specialization 3",
+        "rooms" : [ "Room 3-1", {
+          "name" : "Room 3-2",
+          "department" : "Department 3",
+          "capacity" : 1,
+          "roomGender" : "NONE",
+          "beds" : [ {
+            "id" : 14,
+            "room" : "Room 3-2",
+            "number" : 1
+          } ],
+          "roomEquipments" : [ {
+            "id" : 6,
+            "room" : "Room 3-2",
+            "equipment" : "Equipment 1"
+          } ]
+        }, {
+          "name" : "Room 3-3",
+          "department" : "Department 3",
+          "capacity" : 3,
+          "roomGender" : "FEMALE",
+          "beds" : [ {
+            "id" : 15,
+            "room" : "Room 3-3",
+            "number" : 1
+          }, {
+            "id" : 16,
+            "room" : "Room 3-3",
+            "number" : 2
+          }, {
+            "id" : 17,
+            "room" : "Room 3-3",
+            "number" : 3
+          } ],
+          "roomEquipments" : [ ]
+        } ]
+      },
+      "capacity" : 2,
+      "roomGender" : "SAME_GENDER",
+      "beds" : [ 12, {
+        "id" : 13,
+        "room" : "Room 3-1",
+        "number" : 2
+      } ],
+      "roomEquipments" : [ {
+        "id" : 4,
+        "room" : "Room 3-1",
+        "equipment" : "Equipment 1"
+      }, {
+        "id" : 5,
+        "room" : "Room 3-1",
+        "equipment" : "Equipment 3"
+      } ]
+    },
+    "number" : 1
+  }, 13, 14, 15, 16, 17 ],
+  "departments" : [ "Department 1", "Department 2", "Department 3" ],
+  "equipments" : [ "Equipment 1", "Equipment 2", "Equipment 3" ],
+  "nights" : [ {
+    "number" : 1
+  }, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, {
+    "number" : 22
+  }, 23, {
+    "number" : 24
+  }, {
+    "number" : 25
+  } ],
+  "patients" : [ "Patient_1", "Patient_2", "Patient_3", "Patient_4", "Patient_5", "Patient_6", "Patient_7", "Patient_8", "Patient_9", "Patient_10", "Patient_11", "Patient_12", "Patient_13", "Patient_14", "Patient_15", "Patient_16", "Patient_17", "Patient_18", "Patient_19", "Patient_20", "Patient_21", "Patient_22", "Patient_23", "Patient_24", "Patient_25" ],
+  "patientAdmissions" : [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 ],
+  "preferredEquipments" : [ 1, 2, 3, 4, 5, 6, 7, 8 ],
+  "requiredEquipments" : [ 1, 2 ],
+  "rooms" : [ "Room 1-1", "Room 1-2", "Room 1-3", "Room 2-1", "Room 2-2", "Room 2-3", "Room 3-1", "Room 3-2", "Room 3-3" ],
+  "roomEquipments" : [ 1, 2, 3, 4, 5, 6 ],
+  "specializations" : [ "Specialization 1", "Specialization 2", "Specialization 3" ]
+}

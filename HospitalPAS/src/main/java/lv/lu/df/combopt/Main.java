@@ -20,7 +20,7 @@ public class Main {
     public static void main(String[] args) {
         LOGGER.info("Test Logger");
 
-        PatientAdmissionSchedule problem = PatientAdmissionSchedule.generateTestData();
+        PatientAdmissionSchedule problem = PatientAdmissionSchedule.generateData(50);
 
         SolverFactory<PatientAdmissionSchedule> solverFactory = SolverFactory.create(
                 new SolverConfig()

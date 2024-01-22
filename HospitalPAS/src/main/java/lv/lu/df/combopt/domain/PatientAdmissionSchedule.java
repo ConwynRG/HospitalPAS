@@ -14,6 +14,7 @@ import lv.lu.df.combopt.Main;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 @PlanningSolution
 @Getter @Setter @NoArgsConstructor
@@ -91,6 +92,9 @@ public class PatientAdmissionSchedule {
                         : "The bed isn't assigned"));
         });
     }
+
+    private static int problemId = 0;
+    private static Integer getProblemId() { problemId++; return problemId;}
 
     public static PatientAdmissionSchedule generateTestData()
     {
@@ -197,6 +201,143 @@ public class PatientAdmissionSchedule {
         problem.getRoomEquipments().addAll(List.of(roomEquipment1, roomEquipment2));
         problem.getRequiredEquipments().addAll(List.of(requiredEquipment1, requiredEquipment2));
         problem.getPreferredEquipments().addAll(List.of(preferredEquipment1, preferredEquipment2));
+
+        return problem;
+    }
+
+    // scale: number of patients
+    public static PatientAdmissionSchedule generateData(int scale) {
+        PatientAdmissionSchedule problem = new PatientAdmissionSchedule();
+
+        problem.setSolutionId(PatientAdmissionSchedule.getProblemId().toString());
+
+        Random random = new Random();
+
+        List<Night> nightList = new ArrayList<>();
+        List<Equipment> equipmentList = new ArrayList<>();
+        List<Patient> patientList = new ArrayList<>();
+        List<Specialization> specializationList = new ArrayList<>();
+        List<Department> departmentList = new ArrayList<>();
+        List<Room> roomList = new ArrayList<>();
+        List<Bed> bedList = new ArrayList<>();
+        List<RoomEquipment> roomEquipmentList = new ArrayList<>();
+        List<RequiredEquipment> requiredEquipmentList = new ArrayList<>();
+        List<PreferredEquipment> preferredEquipmentList = new ArrayList<>();
+        List<PatientAdmission> patientAdmissionList = new ArrayList<>();
+        List<BedDesignation> bedDesignationList = new ArrayList<>();
+
+        int maxRoomCapacity = (int) Math.floor(Math.log(scale)) + 1;
+
+        //Night: scale
+        for (int i = 1; i <= scale; i++)
+        {
+            nightList.add(new Night(i));
+        }
+
+        //Equipment: log(scale)
+        int equipmentCount = (int) Math.floor(Math.log(scale));
+
+        for (int i = 1; i <= equipmentCount; i++)
+        {
+            equipmentList.add(new Equipment("Equipment " + i));
+        }
+
+        //Specialization: log(scale)
+        //Department: log(scale)
+        int specializationCount = (int) Math.floor(Math.log(scale));
+
+        for (int i = 1; i <= specializationCount; i++)
+        {
+            Specialization specialization = new Specialization("Specialization " + i);
+            Department department = new Department("Department " + i, specialization, new ArrayList<>());
+
+
+            // Rooms: log(scale)
+            int roomCount = (int) Math.floor(Math.log(scale));
+            for (int j = 1; j <= roomCount; j++)
+            {
+                int roomCapacity = random.nextInt(1, maxRoomCapacity);
+                Room.RoomGender roomType = Room.RoomGender.randomRoomType();
+
+                Room room = new Room("Room " + i + "-" + j, department, roomCapacity, roomType, new ArrayList<>(), new ArrayList<>());
+
+                for (int k = 1; k <= roomCapacity; k++)
+                {
+                    Bed bed = new Bed(room, k);
+
+                    room.getBeds().add(bed);
+                    bedList.add(bed);
+                }
+
+                int roomEquipmentCount = Math.max(random.nextInt(10)-6, 0);
+
+                for (int k = 1; k <= roomEquipmentCount; k++)
+                {
+                    RoomEquipment roomEquipment = new RoomEquipment(room, equipmentList.get(random.nextInt(equipmentList.size())));
+
+                    room.getRoomEquipments().add(roomEquipment);
+                    roomEquipmentList.add(roomEquipment);
+                }
+
+                department.getRooms().add(room);
+                roomList.add(room);
+            }
+
+            specializationList.add(specialization);
+            departmentList.add(department);
+        }
+
+        // Patients: scale
+        for (int i = 1; i <= scale; i++) {
+            Patient.PatientGender gender = random.nextBoolean() ? Patient.PatientGender.FEMALE : Patient.PatientGender.MALE;
+            int preferredRoomCapacity = random.nextInt(1, maxRoomCapacity);
+
+            Patient patient = new Patient("Patient_" + i, gender, preferredRoomCapacity, new ArrayList<>(), new ArrayList<>());
+
+            int requiredEquipmentCount = Math.max(random.nextInt(12)-10, 0);
+            int preferredEquipmentCount = Math.max(random.nextInt(7)-4, 0);
+
+            for (int j = 1; j <= requiredEquipmentCount; j++)
+            {
+                RequiredEquipment requiredEquipment = new RequiredEquipment(patient, equipmentList.get(random.nextInt(equipmentList.size())));
+
+                requiredEquipmentList.add(requiredEquipment);
+                patient.getRequiredEquipments().add(requiredEquipment);
+            }
+
+            for (int j = 1; j <= preferredEquipmentCount; j++)
+            {
+                PreferredEquipment preferredEquipment = new PreferredEquipment(patient, equipmentList.get(random.nextInt(equipmentList.size())));
+
+                preferredEquipmentList.add(preferredEquipment);
+                patient.getPreferredEquipments().add(preferredEquipment);
+            }
+
+            int arrivalNight = random.nextInt(1, nightList.size());
+            int departureNight = Math.min(arrivalNight + random.nextInt(10), nightList.size());
+            Specialization specialization = specializationList.get(random.nextInt(specializationList.size()));
+            boolean isSpecializationRequired = random.nextInt(4) == 0;
+
+            PatientAdmission patientAdmission = new PatientAdmission(patient, nightList.get(arrivalNight-1), nightList.get(departureNight-1),specialization, isSpecializationRequired);
+            BedDesignation bedDesignation = new BedDesignation(i, patientAdmission, null);
+
+            patientList.add(patient);
+            patientAdmissionList.add(patientAdmission);
+            bedDesignationList.add(bedDesignation);
+        }
+
+        problem.getBeds().addAll(bedList);
+        problem.getBedDesignations().addAll(bedDesignationList);
+        problem.getDepartments().addAll(departmentList);
+        problem.getEquipments().addAll(equipmentList);
+        problem.getNights().addAll(nightList);
+        problem.getPatients().addAll(patientList);
+        problem.getPatientAdmissions().addAll(patientAdmissionList);
+        problem.getPreferredEquipments().addAll(preferredEquipmentList);
+        problem.getRequiredEquipments().addAll(requiredEquipmentList);
+        problem.getRooms().addAll(roomList);
+        problem.getRoomEquipments().addAll(roomEquipmentList);
+        problem.getSpecializations().addAll(specializationList);
 
         return problem;
     }

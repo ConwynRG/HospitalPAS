@@ -50,7 +50,7 @@ public class PatientAdmissionScheduleConstraintProvider implements ConstraintPro
                 .forEach(BedDesignation.class)
                 .filter(designation -> designation.getPatientAdmission().getIsSpecializationRequired())
                 .filter(designation -> !Objects.equals(designation.getDepartmentSpecialization().getName(), designation.getPatientAdmission().getSpecialization().getName()))
-                .penalize(HardSoftScore.ofHard(10), designation -> designation.getPatientAdmission().getNightsSpent())
+                .penalize(HardSoftScore.ofHard(100), designation -> designation.getPatientAdmission().getNightsSpent())
                 .asConstraint("patientRequiredSpecializationMet");
     }
 
@@ -108,7 +108,7 @@ public class PatientAdmissionScheduleConstraintProvider implements ConstraintPro
                 .forEach(BedDesignation.class)
                 .filter(designation -> !designation.getPatientAdmission().getIsSpecializationRequired())
                 .filter(designation -> !Objects.equals(designation.getDepartmentSpecialization().getName(), designation.getPatientAdmission().getSpecialization().getName()))
-                .penalize(HardSoftScore.ofSoft(10), designation -> designation.getPatientAdmission().getNightsSpent())
+                .penalize(HardSoftScore.ofSoft(50), designation -> designation.getPatientAdmission().getNightsSpent())
                 .asConstraint("patientPreferredSpecializationMet");
     }
 
@@ -129,7 +129,7 @@ public class PatientAdmissionScheduleConstraintProvider implements ConstraintPro
         return constraintFactory
                 .forEach(BedDesignation.class)
                 .filter(designation -> designation.getPatientAdmission().getPatient().getPreferredMaxRoomSize() < designation.getRoom().getCapacity())
-                .penalize(HardSoftScore.ofSoft(10), designation -> designation.getPatientAdmission().getNightsSpent())
+                .penalize(HardSoftScore.ofSoft(50), designation -> designation.getPatientAdmission().getNightsSpent())
                 .asConstraint("preferredRoomCapacity");
     }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solver xmlns="https://timefold.ai/xsd/solver" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://timefold.ai/xsd/solver https://timefold.ai/xsd/solver/solver.xsd">
+    <environmentMode>REPRODUCIBLE</environmentMode>
+    <!-- Define the model -->
+    <solutionClass>lv.lu.df.combopt.domain.PatientAdmissionSchedule</solutionClass>
+    <entityClass>lv.lu.df.combopt.domain.BedDesignation</entityClass>
+
+    <!-- Define the score function -->
+    <scoreDirectorFactory>
+        <constraintProviderClass>lv.lu.df.combopt.solver.PatientAdmissionScheduleConstraintProvider</constraintProviderClass>
+    </scoreDirectorFactory>
+
+    <!-- Configure the optimization algorithms (optional) -->
+    <termination>
+        <secondsSpentLimit>10</secondsSpentLimit>
+    </termination>
+
+    <constructionHeuristic />
+
+    <localSearch>
+
+    </localSearch>
+</solver>

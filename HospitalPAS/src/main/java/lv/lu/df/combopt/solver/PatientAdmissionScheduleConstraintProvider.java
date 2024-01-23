@@ -33,7 +33,7 @@ public class PatientAdmissionScheduleConstraintProvider implements ConstraintPro
         return constraintFactory
                 .forEachIncludingNullVars(BedDesignation.class)
                 .filter(badDesignation -> badDesignation.getBed() == null)
-                .penalize(HardSoftScore.ONE_HARD, badDesignation -> 1)
+                .penalize(HardSoftScore.ofHard(1000), badDesignation -> 1)
                 .asConstraint("assignEveryPatientToBed");
     }
 

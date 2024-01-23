@@ -1,0 +1,275 @@
+{
+  "solutionId" : "P1",
+  "score" : "0hard/-650soft",
+  "bedDesignations" : [ {
+    "id" : 1,
+    "patientAdmission" : {
+      "id" : 1,
+      "patient" : {
+        "name" : "A",
+        "gender" : "FEMALE",
+        "preferredMaxRoomSize" : 1,
+        "requiredEquipments" : [ {
+          "id" : 1,
+          "patient" : "A",
+          "equipment" : {
+            "name" : "oxygen"
+          }
+        } ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : 1,
+      "departureNight" : 6,
+      "specialization" : {
+        "name" : "Intense Care"
+      },
+      "isSpecializationRequired" : true
+    },
+    "bed" : {
+      "id" : 6,
+      "room" : {
+        "name" : "Room 22",
+        "department" : {
+          "name" : "Intense Care Dep.",
+          "specialization" : "Intense Care",
+          "rooms" : [ {
+            "name" : "Room 21",
+            "department" : "Intense Care Dep.",
+            "capacity" : 2,
+            "roomGender" : "MALE",
+            "beds" : [ {
+              "id" : 3,
+              "room" : "Room 21",
+              "number" : 1
+            }, {
+              "id" : 4,
+              "room" : "Room 21",
+              "number" : 2
+            } ],
+            "roomEquipments" : [ ]
+          }, "Room 22" ]
+        },
+        "capacity" : 1,
+        "roomGender" : "FEMALE",
+        "beds" : [ 6 ],
+        "roomEquipments" : [ {
+          "id" : 2,
+          "room" : "Room 22",
+          "equipment" : "oxygen"
+        } ]
+      },
+      "number" : 1
+    }
+  }, {
+    "id" : 2,
+    "patientAdmission" : {
+      "id" : 2,
+      "patient" : {
+        "name" : "B",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 1,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : 1,
+      "departureNight" : 5,
+      "specialization" : "Intense Care",
+      "isSpecializationRequired" : false
+    },
+    "bed" : 3
+  }, {
+    "id" : 3,
+    "patientAdmission" : {
+      "id" : 3,
+      "patient" : {
+        "name" : "C",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 2,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : 5,
+      "departureNight" : 7,
+      "specialization" : {
+        "name" : "General"
+      },
+      "isSpecializationRequired" : false
+    },
+    "bed" : {
+      "id" : 1,
+      "room" : {
+        "name" : "Room 11",
+        "department" : {
+          "name" : "General Ward Dep.",
+          "specialization" : "General",
+          "rooms" : [ "Room 11", {
+            "name" : "Room 12",
+            "department" : "General Ward Dep.",
+            "capacity" : 1,
+            "roomGender" : "MALE",
+            "beds" : [ {
+              "id" : 5,
+              "room" : "Room 12",
+              "number" : 1
+            } ],
+            "roomEquipments" : [ {
+              "id" : 1,
+              "room" : "Room 12",
+              "equipment" : {
+                "name" : "telemetry"
+              }
+            } ]
+          } ]
+        },
+        "capacity" : 2,
+        "roomGender" : "SAME_GENDER",
+        "beds" : [ 1, {
+          "id" : 2,
+          "room" : "Room 11",
+          "number" : 2
+        } ],
+        "roomEquipments" : [ ]
+      },
+      "number" : 1
+    }
+  }, {
+    "id" : 4,
+    "patientAdmission" : {
+      "id" : 4,
+      "patient" : {
+        "name" : "D",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 1,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : 1,
+      "departureNight" : 3,
+      "specialization" : "General",
+      "isSpecializationRequired" : false
+    },
+    "bed" : 4
+  }, {
+    "id" : 5,
+    "patientAdmission" : {
+      "id" : 5,
+      "patient" : {
+        "name" : "E",
+        "gender" : "FEMALE",
+        "preferredMaxRoomSize" : 2,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ {
+          "id" : 2,
+          "patient" : "E",
+          "equipment" : "telemetry"
+        } ]
+      },
+      "arrivalNight" : 3,
+      "departureNight" : 4,
+      "specialization" : "General",
+      "isSpecializationRequired" : true
+    },
+    "bed" : 1
+  }, {
+    "id" : 6,
+    "patientAdmission" : {
+      "id" : 6,
+      "patient" : {
+        "name" : "F",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 1,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : 4,
+      "departureNight" : 5,
+      "specialization" : "General",
+      "isSpecializationRequired" : true
+    },
+    "bed" : 5
+  }, {
+    "id" : 7,
+    "patientAdmission" : {
+      "id" : 7,
+      "patient" : {
+        "name" : "G",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 2,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : 6,
+      "departureNight" : 7,
+      "specialization" : "General",
+      "isSpecializationRequired" : false
+    },
+    "bed" : 2
+  }, {
+    "id" : 8,
+    "patientAdmission" : {
+      "id" : 8,
+      "patient" : {
+        "name" : "H",
+        "gender" : "MALE",
+        "preferredMaxRoomSize" : 2,
+        "requiredEquipments" : [ {
+          "id" : 2,
+          "patient" : "H",
+          "equipment" : "telemetry"
+        } ],
+        "preferredEquipments" : [ ]
+      },
+      "arrivalNight" : 1,
+      "departureNight" : 2,
+      "specialization" : "General",
+      "isSpecializationRequired" : false
+    },
+    "bed" : 5
+  }, {
+    "id" : 9,
+    "patientAdmission" : {
+      "id" : 9,
+      "patient" : {
+        "name" : "I",
+        "gender" : "FEMALE",
+        "preferredMaxRoomSize" : 1,
+        "requiredEquipments" : [ ],
+        "preferredEquipments" : [ {
+          "id" : 1,
+          "patient" : "I",
+          "equipment" : "oxygen"
+        } ]
+      },
+      "arrivalNight" : 7,
+      "departureNight" : 7,
+      "specialization" : "Intense Care",
+      "isSpecializationRequired" : true
+    },
+    "bed" : 6
+  } ],
+  "beds" : [ 1, 2, 3, 4, 5, 6 ],
+  "departments" : [ "General Ward Dep.", "Intense Care Dep." ],
+  "equipments" : [ "telemetry", "oxygen" ],
+  "nights" : [ {
+    "number" : 1
+  }, {
+    "number" : 2
+  }, {
+    "number" : 3
+  }, {
+    "number" : 4
+  }, {
+    "number" : 5
+  }, {
+    "number" : 6
+  }, {
+    "number" : 7
+  } ],
+  "patients" : [ "A", "B", "C", "D", "E", "F", "G", "H", "I" ],
+  "patientAdmissions" : [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
+  "preferredEquipments" : [ 1, 2 ],
+  "requiredEquipments" : [ 1, 2 ],
+  "rooms" : [ "Room 11", "Room 21", "Room 12", "Room 22" ],
+  "roomEquipments" : [ 1, 2 ],
+  "specializations" : [ "General", "Intense Care" ]
+}

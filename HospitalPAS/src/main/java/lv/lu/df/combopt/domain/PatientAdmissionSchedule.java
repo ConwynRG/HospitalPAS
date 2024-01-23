@@ -226,16 +226,18 @@ public class PatientAdmissionSchedule {
         List<PatientAdmission> patientAdmissionList = new ArrayList<>();
         List<BedDesignation> bedDesignationList = new ArrayList<>();
 
-        int maxRoomCapacity = (int) Math.floor(Math.log(scale)) + 1;
+        int maxRoomCapacity = (int) Math.floor(Math.log(scale)) + 2;
 
         //Night: scale
-        for (int i = 1; i <= scale; i++)
+        int nightCount = (int) Math.floor(scale*0.3);
+
+        for (int i = 1; i <= nightCount; i++)
         {
             nightList.add(new Night(i));
         }
 
         //Equipment: log(scale)
-        int equipmentCount = (int) Math.floor(Math.log(scale));
+        int equipmentCount = (int) Math.floor(Math.log(scale)/2);
 
         for (int i = 1; i <= equipmentCount; i++)
         {
